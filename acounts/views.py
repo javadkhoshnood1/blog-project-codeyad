@@ -4,7 +4,6 @@ from django.shortcuts import render
 
 
 def login_view(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    print(f"password,username{username} {password}")
+    if request.method == "POST":
+        print(f"{request.POST.get('username')} agelehhhh {request.POST.get('password')}")
     return render(request,'acounts/login_page.html')
