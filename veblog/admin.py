@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Veblog
+from .models import Veblog, Category
+
 # Register your models here.
 
-
 admin.site.register(Veblog)
+admin.site.register(Category)

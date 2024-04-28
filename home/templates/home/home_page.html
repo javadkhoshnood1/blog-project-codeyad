@@ -120,39 +120,6 @@
         </div>
     </div>
 </section>
-<section class="ab_area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s"
-                 data-wow-offset="0">
-                <div class="ab_img"><img src="{% static 'img/about1.png' %}" class="img-fluid" alt="image"></div>
-            </div>
-            <div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s"
-                 data-wow-offset="0">
-                <div class="ab_content">
-                    <h2>ما دوره آنلاین را در جهان جهانی ارائه می دهیم</h2>
-                    <p>ما یک رویکرد کاملاً جدید برای اساسی ترین پارادایم های یادگیری ارائه می دهیم. از میان طیف گسترده
-                        ای از گزینه های یادگیری انتخاب کنید و مهارت های جدیدی به دست آورید! مدرسه ما معلوم است</p>
-                    <p>ما یک رویکرد کاملاً جدید برای اساسی ترین پارادایم های یادگیری ارائه می دهیم. از میان طیف گسترده
-                        ای از گزینه های یادگیری انتخاب کنید و مهارت های جدیدی به دست آورید! مدرسه ما معلوم است</p>
-                    <ul>
-                        <li>
-                            <span class="ti-check"></span>دسترسی پیدا کنید<b>12000+</b>از دوره های برتر ما
-                        </li>
-                        <li>
-                            <span class="ti-check"></span>موضوع پرطرفدار برای یادگیری اکنون در دوره های آنلاین ما برای
-                            دانش آموزان
-                        </li>
-                        <li>
-                            <span class="ti-check"></span>مربی مناسب خود را پیدا کنید
-                        </li>
-                    </ul>
-                    <a class="btn_one" href="course.html">مشاهده همه دوره ها<i class="ti-arrow-top-left"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <section class="top_cat__area section-padding"
          style="background-image: url({% static 'img/bg/section-2.jpg' %}); background-size:cover; background-position: center center;">
     <div class="container">
@@ -196,130 +163,37 @@
                 <div class="section-title"><h2>با بیش از<b>80000+</b><br>سازندگان دوره ها و یادگیری</h2></div>
             </div>
             <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="cour_btn"><a href="course.html" class="btn_one">مشاهده تمام دوره ها<i
+                <div class="cour_btn"><a href="{% url 'course:courselist' %}" class="btn_one">مشاهده تمام دوره ها<i
                         class="ti-arrow-top-left"></i></a></div>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="single_course">
-                    <div class="single_c_img">
-                        <img src="{% static 'img/course/1.png' %}" class="img-fluid"
-                             alt="course-image"><span>تحصیلات</span>
+            {% for i in courses %}
+                <div class="col-lg-4 col-sm-6 col-xs-12">
+                    <div class="single_course">
+                        <div class="single_c_img">
+                            <img src="{{ i.image_course.url }}" class="img-fluid"
+                                 alt="course-image"><span>{{ i.time_course }}ساعت </span>
+                        </div>
+                       <p><span class="ti-pencil"></span>{{ i.type.all.first }}</p>
+                        <p><span class="ti-user"></span> {{ i.numbers_members }}نفر</p>
+                        {% if i.numbers_members >= 50 %}
+                            <div class=" mt-3 d-flex align-items-center justify-content-center">
+                                <span style="background-color: green;color: white;padding: 10px;border-radius: 20px">میزان رضایت : {{ i.like_members }}</span>
+                            </div>
+                        {% else %}
+                            <div class=" mt-3 d-flex align-items-center justify-content-center">
+                                <span style="background-color: yellow;color: black;padding: 10px;border-radius: 20px">میزان رضایت : {{ i.like_members }}</span>
+                            </div>
+                        {% endif %}
+                        <div class=" mt-3 d-flex align-items-center justify-content-center">
+                            <span style="color:blue" class="ti-image"></span> نام استاد : {{ i.teacher }}
+                        </div>
+                        <div class="price">هزینه دوره - {{ i.price_course }} تومان</div>
                     </div>
-                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                        class="fa fa-star"></i><i class="fa fa-star"></i><h4><a href="course.html">اصول اولیه کاربر را
-                    کامل از مبتدی تا پیشرفته</a></h4>
-                    <p><span class="ti-book"></span>12 دوره</p>
-                    <p><span class="ti-alarm-clock"></span>2 ساعت و 32 دقیقه</p>
-                    <div class="price">هزینه دوره - 99 تومان</div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="single_course">
-                    <div class="single_c_img">
-                        <img src="{% static 'img/course/2.png' %}" class="img-fluid"
-                             alt="course-image"><span>UI/UX</span>
-                    </div>
-                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                        class="fa fa-star"></i><i class="fa fa-star"></i><h4><a href="course.html">دوره توسعه اندروید 12
-                    و کاتلین پیشرفته</a></h4>
-                    <p><span class="ti-book"></span>41 دوره</p>
-                    <p><span class="ti-alarm-clock"></span>3 ساعت و 32 دقیقه</p>
-                    <div class="price">هزینه دوره - 49 تومان</div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="single_course">
-                    <div class="single_c_img">
-                        <img src="{% static 'img/course/3.png' %}" class="img-fluid"
-                             alt="course-image"><span>سبک زندگی</span>
-                    </div>
-                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                        class="fa fa-star"></i><i class="fa fa-star"></i><h4><a href="course.html">دوره آموزشی HTML، CSS
-                    و Javascript را کامل کنید</a></h4>
-                    <p><span class="ti-book"></span>32 دوره</p>
-                    <p><span class="ti-alarm-clock"></span>2 ساعت و 32 دقیقه</p>
-                    <div class="price">هزینه دوره - رایگان</div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="single_course">
-                    <div class="single_c_img">
-                        <img src="{% static 'img/course/4.png' %}" class="img-fluid"
-                             alt="course-image"><span>علوم پایه</span>
-                    </div>
-                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                        class="fa fa-star"></i><i class="fa fa-star"></i><h4><a href="course.html">IOS و Swift توسعه
-                    اپلیکیشن iOS را کامل کردند</a></h4>
-                    <p><span class="ti-book"></span>19 دوره</p>
-                    <p><span class="ti-alarm-clock"></span>2 ساعت و 32 دقیقه</p>
-                    <div class="price">هزینه دوره - 59 تومان</div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="single_course">
-                    <div class="single_c_img">
-                        <img src="{% static 'img/course/5.png' %}" class="img-fluid"
-                             alt="course-image"><span>نوین</span>
-                    </div>
-                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                        class="fa fa-star"></i><i class="fa fa-star"></i><h4><a href="course.html">طراحی گرافیک را با
-                    بهترین مربی IT بیاموزید</a></h4>
-                    <p><span class="ti-book"></span>22 دوره</p>
-                    <p><span class="ti-alarm-clock"></span>2 ساعت و 32 دقیقه</p>
-                    <div class="price">هزینه دوره - 79 تومان</div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="single_course">
-                    <div class="single_c_img">
-                        <img src="{% static 'img/course/6.png' %}" class="img-fluid"
-                             alt="course-image"><span>بازار یابی</span>
-                    </div>
-                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                        class="fa fa-star"></i><i class="fa fa-star"></i><h4><a href="course.html">علم داده را برای کسب
-                    و کار بعدی خود کامل کنید</a></h4>
-                    <p><span class="ti-book"></span>11 دوره</p>
-                    <p><span class="ti-alarm-clock"></span>2 ساعت و 32 دقیقه</p>
-                    <div class="price">هزینه دوره - 39 تومان</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<div class="partner-logo section-padding">
-    <div class="container">
-        <div class="row part_bg">
-            <div class="col-lg-4 col-sm-4 col-xs-12">
-                <div class="partner_title"><h3>کمک<span>86000+</span>شرکت‌های جهانی دستکش‌ها را برمی‌دارند</h3></div>
-            </div>
-            <div class="col-lg-8 col-sm-8 col-xs-12 text-center">
-                <div class="partner">
-                    <a href="#"><img src="{% static 'img/clients/1.png' %}" alt="image"></a><a href="#"><img
-                        src="{% static 'img/clients/2.png' %}" alt="image"></a><a href="#"><img
-                        src="{% static 'img/clients/3.png' %}" alt="image"></a><a href="#"><img
-                        src="{% static 'img/clients/4.png' %}" alt="image"></a><a href="#"><img
-                        src="{% static 'img/clients/5.png' %}" alt="image"></a><a href="#"><img
-                        src="{% static 'img/clients/2.png' %}" alt="image"></a><a href="#"><img
-                        src="{% static 'img/clients/1.png' %}" alt="image"></a><a href="#"><img
-                        src="{% static 'img/clients/3.png' %}" alt="image"></a><a href="#"><img
-                        src="{% static 'img/clients/4.png' %}" alt="image"></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<section class="vid_area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 vp_top wow fadeInUDown" data-wow-duration="1s" data-wow-delay="0.2s"
-                 data-wow-offset="0">
-                <div class="video-area"
-                     style="background-image: url({% static 'img/bg/video.jpg' %}); background-size:cover; background-position: center center;">
-                    <a href="https://www.youtube.com/watch?v=RXv_uIN6e-Y" class="magnific_popup video-button"><i
-                            class="fa fa-play"></i></a></div>
-            </div>
+            {% endfor %}
+
         </div>
     </div>
 </section>
@@ -331,219 +205,36 @@
                 گزینه های یادگیری انتخاب کنید و مهارت های جدیدی به دست آورید! مدرسه ما معلوم است</p>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s"
-                 data-wow-offset="0">
-                <div class="our-team">
-                    <div class="team-content">
-                        <a href="#"><img src="{% static 'img/team/team1.jpg' %}" alt=""></a>
-                        <ul class="social-links">
-                            <li><a href="#" class="ti-twitter"></a></li>
-                            <li><a href="#" class="ti-linkedin"></a></li>
-                            <li><a href="#" class="ti-facebook"></a></li>
-                        </ul>
-                    </div>
-                    <div class="team-prof">
-                        <h3>بیلکیس وابی</h3>
-                        <span>طراح وب</span>
-                    </div>
-                    <div class="sth_det2">
-                        <span class="ti-file"><u>04 دوره</u></span><span class="ti-user"><u>27 دانشجو</u></span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s"
-                 data-wow-offset="0">
-                <div class="our-team">
-                    <div class="team-content">
-                        <a href="#"><img src="{% static 'img/team/team2.jpg' %}" alt=""></a>
-                        <ul class="social-links">
-                            <li><a href="#" class="ti-twitter"></a></li>
-                            <li><a href="#" class="ti-linkedin"></a></li>
-                            <li><a href="#" class="ti-facebook"></a></li>
-                        </ul>
-                    </div>
-                    <div class="team-prof">
-                        <h3>خلق وسیم</h3>
-                        <span>شرکت انواتو</span>
-                    </div>
-                    <div class="sth_det2">
-                        <span class="ti-file"><u>06 دوره</u></span><span class="ti-user"><u>41 دانش آموز</u></span>
+            {% for i in coachs %}
+                <div class="col-lg-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s"
+                     data-wow-offset="0">
+                    <div class="our-team">
+                        <div class="team-content">
+                            <a href="/coach/{{ i.id }}"><img src="{{ i.image_coach.url }}" alt=""></a>
+                            <ul class="social-links">
+                                <li><a href="#" class="ti-twitter"></a></li>
+                                <li><a href="#" class="ti-linkedin"></a></li>
+                                <li><a href="#" class="ti-facebook"></a></li>
+                            </ul>
+                        </div>
+                        <div class="team-prof">
+                            <h3>{{ i.name }}</h3>
+                            <span>{{ i.work_type }}</span>
+                        </div>
+                        <div class="sth_det2">
+                            <span class="ti-file"><u>{{ i.course_number }} دوره</u></span><span
+                                class="ti-user"><u>{{ i.student_number }} دانشجو</u></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s"
-                 data-wow-offset="0">
-                <div class="our-team">
-                    <div class="team-content">
-                        <a href="#"><img src="{% static 'img/team/team3.jpg' %}" alt=""></a>
-                        <ul class="social-links">
-                            <li><a href="#" class="ti-twitter"></a></li>
-                            <li><a href="#" class="ti-linkedin"></a></li>
-                            <li><a href="#" class="ti-facebook"></a></li>
-                        </ul>
-                    </div>
-                    <div class="team-prof">
-                        <h3>شیین تیم</h3>
-                        <span>Codecanyou</span>
-                    </div>
-                    <div class="sth_det2">
-                        <span class="ti-file"><u>13 دوره</u></span><span class="ti-user"><u>31 دانش آموز</u></span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s"
-                 data-wow-offset="0">
-                <div class="our-team">
-                    <div class="team-content">'
-                        <a href="#"><img src="{% static 'img/team/team4.jpg' %}" alt=""></a>
-                        <ul class="social-links">
-                            <li><a href="#" class="ti-twitter"></a></li>
-                            '
-                            <li><a href="#" class="ti-linkedin"></a></li>
-                            <li><a href="#" class="ti-facebook"></a></li>
-                        </ul>
-                    </div>
-                    <div class="team-prof">
-                        <h3>شريف شريفه</h3>
-                        <span>چوتور Tsc</span>
-                    </div>
-                    <div class="sth_det2">
-                        <span class="ti-file"><u>07 دوره</u></span><span class="ti-user"><u>24 دانشجو</u></span>
-                    </div>
-                </div>
+            {% endfor %}
+            <div class="col-lg-3 col-sm-6 col-xs-12 wow fadeinup d-flex justify-content-center align-items-center">
+                <a href="{% url 'coach:chechlist' %}" class="btn btn-outline-primary p-3"> مشاهده تمامی مربی ها </a>
             </div>
         </div>
     </div>
 </section>
-<section class="ab_area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s"
-                 data-wow-offset="0">
-                <div class="ab_content">
-                    <h2>چرا ما را برای دوره های آموزشی آنلاین خود انتخاب کنید؟</h2>
-                    <p>ما یک رویکرد کاملاً جدید برای اساسی ترین پارادایم های یادگیری ارائه می دهیم. از میان طیف گسترده
-                        ای از گزینه های یادگیری انتخاب کنید و مهارت های جدیدی به دست آورید! مدرسه ما معلوم است</p>
-                    <p>ما یک رویکرد کاملاً جدید برای اساسی ترین پارادایم های یادگیری ارائه می دهیم. از میان طیف گسترده
-                        ای از گزینه های یادگیری انتخاب کنید و مهارت های جدیدی به دست آورید! مدرسه ما معلوم است</p>
-                    <ul>
-                        <li>
-                            <span class="ti-check"></span>دسترسی پیدا کنید<b>12000+</b>از دوره های برتر ما
-                        </li>
-                        <li>
-                            <span class="ti-check"></span>موضوع پرطرفدار برای یادگیری اکنون در دوره های آنلاین ما برای
-                            دانش آموزان
-                        </li>
-                        <li>
-                            <span class="ti-check"></span>مربی مناسب خود را پیدا کنید
-                        </li>
-                    </ul>
-                    <a class="btn_one" href="course.html">مشاهده همه دوره ها<i class="ti-arrow-top-left"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s"
-                 data-wow-offset="0">
-                <div class="ab_img">
-                    <img src="{% static 'img/about3.png' %}" class="img-fluid" alt="image">
-                    <div class="home_ps2">
-                        <span class="ti-book"></span>
-                        <h2>3300+</h2>
-                        <p>دوره آنلاین</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="testi_area section-padding">
-    <div class="container">
-        <div class="section-title"><h2>آنچه دانش آموزان می گویند برای انجام<br>دوره آنلاین آنها</h2></div>
-        <div class="row">
-            <div class="col-lg-6 col-sm-12 col-xs-12">
-                <div class="ab_img"><img src="{% static 'img/review.png' %}" class="img-fluid" alt="image"></div>
-            </div>
-            <div class="col-lg-6 col-sm-12 col-xs-12">
-                <div id="testimonial-slider" class="owl-carousel">
-                    <div class="testimonial">
-                        <img src="{% static 'img/quote.png' %}" alt="">
-                        <div class="testimonial_content">
-                            <i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i
-                                class="ti-star"></i>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
-                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
-                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
-                                زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد</p>
-                        </div>
-                        <div class="testi_pic_title">
-                            <img src="{% static 'img/testimonial/1.png' %}" alt=""><h4>عجمین عادل</h4>
-                            <p>شرکت گروتن</p>
-                        </div>
-                    </div>
-                    <div class="testimonial">
-                        <img src="{% static 'img/quote.png' %}" alt="">
-                        <div class="testimonial_content">
-                            <i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i
-                                class="ti-star"></i>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
-                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
-                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
-                                زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد</p>
-                        </div>
-                        <div class="testi_pic_title">
-                            <img src="{% static 'img/testimonial/2.png' %}" alt=""><h4>شاروخ خان</h4>
-                            <p>Red Chili Inc</p>
-                        </div>
-                    </div>
-                    <div class="testimonial">
-                        <img src="{% static 'img/quote.png' %}" alt="">
-                        <div class="testimonial_content">
-                            <i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i
-                                class="ti-star"></i>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
-                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
-                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
-                                زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد</p>
-                        </div>
-                        <div class="testi_pic_title">
-                            <img src="{% static 'img/testimonial/3.png' %}" alt=""><h4>آنوشکا شارما</h4>
-                            <p>شرکت نایکا</p>
-                        </div>
-                    </div>
-                    <div class="testimonial">
-                        <img src="{% static 'img/quote.png' %}" alt="">
-                        <div class="testimonial_content">
-                            <i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i
-                                class="ti-star"></i>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
-                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
-                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
-                                زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد</p>
-                        </div>
-                        <div class="testi_pic_title">
-                            <img src="{% static 'img/testimonial/4.png' %}" alt=""><h4>عجمین عادل</h4>
-                            <p>شرکت گروتن</p>
-                        </div>
-                    </div>
-                    <div class="testimonial">
-                        <img src="{% static 'img/quote.png' %}" alt="">
-                        <div class="testimonial_content">
-                            <i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i
-                                class="ti-star"></i>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
-                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
-                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
-                                زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد</p>
-                        </div>
-                        <div class="testi_pic_title">
-                            <img src="{% static 'img/testimonial/5.png' %}" alt=""><h4>عجمین عادل</h4>
-                            <p>شرکت گروتن</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 <section id="blog" class="blog_area section-padding">
     <div class="container">
         <div class="section-title text-center">
@@ -554,39 +245,28 @@
                 </div>
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInUp" data-wow-duration="1s"
-                             data-wow-delay="0.1s" data-wow-offset="0">
-                            <div class="single_blog">
-                                <img src="{% static 'img/blog/1.jpg' %}" class="img-fluid" alt="image">
-                                <div class="content_box">
-                                    <span>10 مه 2024 |<a href="blog.html">تحصیلات</a></span>
-                                    <h2><a href="blog.html">نقاشی و مجسمه سازی حرفه ای موبایل</a></h2>
-                                    <a class="btn_one" href="blog.html">ادامه مطلب<i class="ti-arrow-top-left"></i></a>
+                        {% for i in veblogs %}
+                            <div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInUp" data-wow-duration="1s"
+                                 data-wow-delay="0.1s" data-wow-offset="0">
+                                <div class="single_blog">
+                                    <img src="{{ i.image.url }}" class="img-fluid" alt="image">
+                                    <div class="content_box">
+                                        <h2>{{ i.title }}</h2>
+                                        <span>{{ i.aouter }},</span><span>{{ i.created }}</span>
+                                        {% for i in i.type.all %}
+
+                                            <span class="text-warning"> {{ i }},</span>
+                                        {% endfor %}
+                                        <a href="/blog/{{ i.id }}" class=" btn btn-outline-primary px-4 mt-3">ادامه
+                                            مطلب</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInUp" data-wow-duration="1s"
-                             data-wow-delay="0.1s" data-wow-offset="0">
-                            <div class="single_blog">
-                                <img src="{% static 'img/blog/2.jpg' %}" class="img-fluid" alt="image">
-                                <div class="content_box">
-                                    <span>16 مه 2024 |<a href="blog.html">تحصیلات</a></span>
-                                    <h2><a href="blog.html">قالب گیری سرامیک حرفه ای برای مبتدیان</a></h2>
-                                    <a class="btn_one" href="blog.html">ادامه مطلب<i class="ti-arrow-top-left"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInUp" data-wow-duration="1s"
-                             data-wow-delay="0.3s" data-wow-offset="0">
-                            <div class="single_blog">
-                                <img src="{% static 'img/blog/3.jpg' %}" class="img-fluid" alt="image">
-                                <div class="content_box">
-                                    <span>18 مه 2024 |<a href="blog.html">برنامه نویسی</a></span>
-                                    <h2><a href="blog.html">آموزش درباره ایجاد رهبران برای فردا است</a></h2>
-                                    <a class="btn_one" href="blog.html">ادامه مطلب<i class="ti-arrow-top-left"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-flex  justify-content-center align-items-center">
+                        <a href="{% url 'veblog:list' %}" class="btn btn-outline-primary p-3"> مشاهده تمامی وبلاگ
+                            ها </a>
                     </div>
                 </div>
                 </div></section>

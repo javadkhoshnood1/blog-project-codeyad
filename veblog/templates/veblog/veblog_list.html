@@ -6,20 +6,11 @@
 </head>
 <body data-spy="scroll" data-offset="80">
 {% include 'includes/header_site.html' %}
-<section class="section-top">
-    <div class="container">
-        <div class="col-lg-10 offset-lg-1 text-center">
-            <div class="section-top-title wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.3s"
-                 data-wow-offset="0">
-                <h1>وبلاگ ما</h1>
-                <ul>
-                    <li><a href="index.html">صفحه اصلی</a></li>
-                    <li>/ وبلاگ</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+<div class="section-title text-center mt-5">
+    <h2>آخرین وبلاگ و اخبار</h2>
+    <p>ما یک رویکرد کاملاً جدید برای اساسی ترین پارادایم های برنامه نویسی ارائه می دهیم. از میان طیف گسترده ای از
+        گزینه های برنامه نویسی انتخاب کنید و مهارت های جدیدی به دست آورید! </p>
+</div>
 <section id="blog" class="blog_area section-padding">
     <div class="container">
         <div class="row">
@@ -34,9 +25,13 @@
 
                         {% endif %}
                         <div class="content_box">
-                            <span> {{ i.date }}<a href="blog_single.html">{{ i.type }}</a></span>
-                            <h2><a href="blog_single.html">{{ i.title }}</a></h2>
-                            <a class="btn_one" href="course.html">ادامه مطلب<i class="ti-arrow-top-left"></i></a>
+                            <h2>{{ i.title }}</h2>
+                            <span>{{ i.aouter }},</span><span>{{ i.created }}</span>
+                            {% for i in i.type.all %}
+
+                                <span class="text-warning"> {{ i }},</span>
+                                {% endfor %}
+                            <a href="/blog/{{ i.id }}" class=" btn btn-outline-primary px-4 mt-3">ادامه مطلب</a>
                         </div>
                     </div>
                 </div>

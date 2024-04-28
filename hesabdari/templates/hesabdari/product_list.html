@@ -1,0 +1,73 @@
+{% load static %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'includes/head_tags.html' %}
+
+</head>
+
+<body dir="rtl">
+{% include 'includes/header_site.html' %}
+
+
+<div class="container mt-5">
+    <h1 class="massagejavadlist text text-center">list customer</h1>
+
+</div>
+
+<div class="container mt-5">
+
+    <table class="table table-dark  table-striped table-hover">
+        <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">name</th>
+            <th scope="col">price</th>
+
+
+            <th scope="col">delete</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in products %}
+            <tr>
+                <th scope="row">{{ i.id }}</th>
+                <td>{{ i.name }}</td>
+                <td>{{ i.price_product }}</td>
+
+                <td><a class="btn btn-outline-danger" href="/hesabdari/deleteproduct/{{ i.id }}"> delete product</a>
+                </td>
+
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+</div>
+<div class="d-flex justify-content-center align-item-center gap-2">
+    <a href="{% url 'hesabdari:addproduct' %}" type="button" class="btn btn-outline-secondary btn-lg btn-block">
+        add product
+    </a>
+     <a href="{% url 'hesabdari:addcustomer' %}" type="button" class="btn btn-outline-primary btn-lg btn-block">
+        add customer
+    </a>
+     <a href="{% url 'hesabdari:customerlist' %}" type="button" class="btn btn-outline-info btn-lg btn-block">
+        list customer
+    </a>
+     <a href="{% url 'hesabdari:productlist' %}" type="button" class="btn btn-outline-danger btn-lg btn-block">
+        list product
+    </a>
+</div>
+
+{% include 'includes/footer_site.html' %}
+
+
+{% include 'includes/foot_script.html' %}
+
+</body>
+</html>

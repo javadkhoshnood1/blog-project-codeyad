@@ -1,0 +1,52 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<html dir="rtl" lang="en">
+<head>
+    {% include 'includes/head_tags.html' %}
+<body data-spy="scroll" data-offset="80">
+{% include 'includes/header_site.html' %}
+
+<section class="home_course section-padding">
+    <div class="container">
+        <div class="row">
+            {% for i in courses %}
+                <div class="col-lg-4 col-sm-6 col-xs-12">
+                    <div class="single_course">
+                        <div class="single_c_img">
+                            <img src="{{ i.image_course.url }}" class="img-fluid"
+                                 alt="course-image"><span> {{ i.time_course }} ساعت</span>
+                        </div>
+
+
+                        <h4><a
+                                href="{{ i.get_absolote_url }}">{{ i.title }}</a>
+                        </h4>
+
+                        <p><span class="ti-pencil"></span>{{ i.type.all.first }}</p>
+                        <p><span class="ti-user"></span> {{ i.numbers_members }}نفر</p>
+                        {% if i.numbers_members >= 50 %}
+                            <div class=" mt-3 d-flex align-items-center justify-content-center">
+                                <span style="background-color: green;color: white;padding: 10px;border-radius: 20px">میزان رضایت : {{ i.like_members }}</span>
+                            </div>
+                        {% else %}
+                            <div class=" mt-3 d-flex align-items-center justify-content-center">
+                                <span style="background-color: yellow;color: black;padding: 10px;border-radius: 20px">میزان رضایت : {{ i.like_members }}</span>
+                            </div>
+                        {% endif %}
+                        <div class=" mt-3 d-flex align-items-center justify-content-center">
+                            <span style="color:blue" class="ti-image"></span> نام استاد : {{ i.teacher }}
+                        </div>
+                        <div class="price">هزینه دوره - {{ i.price_course }} تومان</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% include 'includes/footer_site.html' %}
+
+{% include 'includes/foot_script.html' %}
+</body>
+</html>

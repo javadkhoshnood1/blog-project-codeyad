@@ -1,0 +1,51 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<html dir="rtl" lang="en">
+<head>
+    {% include 'includes/head_tags.html' %}
+</head>
+<body data-spy="scroll" data-offset="80">
+{% include 'includes/header_site.html' %}
+
+<section class="team_area section-padding">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>با مربیان ما آشنا شوید</h2>
+            <p>ما یک رویکرد کاملاً جدید برای اساسی ترین پارادایم های یادگیری ارائه می دهیم. از میان طیف گسترده ای از
+                گزینه های یادگیری انتخاب کنید و مهارت های جدیدی به دست آورید! مدرسه ما معلوم است</p>
+        </div>
+        <div class="row">
+            {% for i in coachs %}
+                <div class="col-lg-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s"
+                     data-wow-offset="0">
+                    <div class="our-team">
+                        <div class="team-content">
+                            <a href="/coach/{{ i.id }}"><img src="{{ i.image_coach.url }}" alt=""></a>
+                            <ul class="social-links">
+                                <li><a href="#" class="ti-twitter"></a></li>
+                                <li><a href="#" class="ti-linkedin"></a></li>
+                                <li><a href="#" class="ti-facebook"></a></li>
+                            </ul>
+                        </div>
+                        <div class="team-prof">
+                            <h3>{{ i.name }}</h3>
+                            <span>{{ i.work_type }}</span>
+                        </div>
+                        <div class="sth_det2">
+                            <span class="ti-file"><u>{{ i.course_number }} دوره</u></span><span
+                                class="ti-user"><u>{{ i.student_number }} دانشجو</u></span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% include 'includes/footer_site.html' %}
+
+
+{% include 'includes/foot_script.html' %}
+</body>
+</html>
