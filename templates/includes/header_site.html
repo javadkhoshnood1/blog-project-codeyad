@@ -11,32 +11,48 @@
                 <nav id="main-menu">
                     <ul>
                         <li>
-                            <a href="{% url 'home:main' %}">صفحه اصلی</a>
+                            <a {% if request.resolver_match.url_name == 'main' %} style="color: #0a58ca" {% endif %}
+                                                                                  href="{% url 'home:main' %}">صفحه
+                                اصلی</a>
                         </li>
-                        <li><a href="{% url 'coach:chechlist' %}">مربی</a></li>
+                        <li><a {% if request.resolver_match.url_name == 'chechlist' %}
+                            style="color: #0a58ca" {% endif %}
+                            href="{% url 'coach:chechlist' %}">مربی</a>
+                        </li>
                         <li>
-                            <a href="{% url 'course:courselist' %}">دوره</a>
+                            <a {% if request.resolver_match.url_name == 'courselist' %}
+                                style="color: #0a58ca" {% endif %}
+                                href="{% url 'course:courselist' %}">دوره</a>
                         </li>
                         <li>
-                            <a href="{% url 'veblog:list' %}">وبلاگ</a>
+                            <a {% if request.resolver_match.url_name == 'list' %} style="color: #0a58ca" {% endif %}
+                                                                                  href="{% url 'veblog:list' %}">وبلاگ</a>
                         </li>
-                        <li><a href="{% url 'massage:massage_list' %}">پیام ها </a></li>
+
+                        <li><a {% if request.resolver_match.url_name == 'massage_list' %}
+                            style="color: #0a58ca" {% endif %}
+                            href="{% url 'massage:massage_list' %}">پیام
+                            ها </a></li>
                         {% if request.user.is_authenticated %}
-                            <li><a href="{% url 'hesabdari:customerlist' %}">حسابداری</a></li>
+                            <li><a
+                                    {% if request.resolver_match.url_name == 'customerlist' or request.resolver_match.url_name == 'productlist' %}
+                                        style="color: #0a58ca" {% endif %}
+                                        href="{% url 'hesabdari:customerlist' %}">حسابداری</a>
+                            </li>
 
                         {% endif %}
                     </ul>
                 </nav>
             </div>
-            <div class="col-20 gap-2   d-flex d-xl-block text-end align-self-center">
+            <div class="col-20   d-flex d-xl-block text-end align-self-center">
                 {% if request.user.is_authenticated %}
-                    <a href="#"
-                       class="btn btn-outline-success text-dark font p-3 rounded-2 ">{{ request.user.username }}</a>
+                    <a href="{% url 'acount:edit' %}"
+                       class="btn btn-primary text-dark font p-3 rounded-2 ">{{ request.user.username }}</a>
                     {##}
                     {#                    <a href="#"#}
                     {#                       class="btn btn-outline-success text-dark font p-3 rounded-2 ">{{ user.profileuser.persian_code }}</a>#}
-                    <a href="{% url 'acount:logout' %}" class="btn btn-primary text-dark font p-3 rounded-2 ">خروج از
-                        حساب </a>                {% else %}
+                    <a href="{% url 'acount:logout' %}"
+                       class="btn btn-danger text-dark font p-3 rounded-2 ">logout</a>                {% else %}
                     <a href="{% url 'acount:login' %}" class="btn btn-outline-success text-dark font p-3 rounded-2 ">ورود</a>
                     <a href="{% url 'acount:signin' %}" class="btn btn-primary text-dark font p-3 rounded-2 ">ثبت
                         نام </a>

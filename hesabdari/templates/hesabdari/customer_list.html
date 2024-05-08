@@ -1,78 +1,66 @@
+{% extends 'base.html' %}
 {% load static %}
 
-{% load static %}
+{% block title %}
+    لیست مشتریان
+{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% include 'includes/head_tags.html' %}
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="massagejavadlist text text-center">list customer</h1>
 
-</head>
+    </div>
 
-<body dir="rtl">
-{% include 'includes/header_site.html' %}
+    <div class="container mt-5">
 
-
-<div class="container mt-5">
-    <h1 class="massagejavadlist text text-center">list customer</h1>
-
-</div>
-
-<div class="container mt-5">
-
-    <table class="table table-dark  table-striped table-hover">
-        <thead>
-        <tr>
-            <th scope="col">id</th>
-            <th scope="col">name</th>
-            <th scope="col">number</th>
-            <th scope="col">date</th>
-            <th scope="col">product number</th>
-            <th scope="col">edit</th>
-
-            <th scope="col">delete</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        {% for i in customers %}
+        <table class="table table-dark  table-striped table-hover">
+            <thead>
             <tr>
-                <th scope="row">{{ i.id }}</th>
-                <td>{{ i.name }}</td>
-                <td>{{ i.phone_number }}</td>
-                <td>{{ i.date }}</td>
-                <td>{{ i.product.count }}</td>
-                <td><a class="btn btn-outline-success" href="{{ i.get_absolote_url }}"> edit customer</a>
+                <th scope="col">id</th>
+                <th scope="col">name</th>
+                <th scope="col">number</th>
+                <th scope="col">date</th>
+                <th scope="col">product number</th>
+                <th scope="col">edit</th>
 
-                <td><a class="btn btn-outline-danger" href="{{ i.delete_customer_url }}"> delete customer</a>
-                </td>
+                <th scope="col">delete</th>
 
             </tr>
-        {% endfor %}
+            </thead>
+            <tbody>
+            {% for i in customers %}
+                <tr>
+                    <th scope="row">{{ i.id }}</th>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.phone_number }}</td>
+                    <td>{{ i.get_created_costomer }}</td>
+                    <td>{{ i.product.count }}</td>
+                    <td><a class="btn btn-outline-success" href="{{ i.get_absolote_url }}"> edit customer</a>
 
-        </tbody>
-    </table>
+                    <td><a class="btn btn-outline-danger" href="{{ i.delete_customer_url }}"> delete customer</a>
+                    </td>
 
-</div>
-<div class="d-flex justify-content-center align-item-center gap-2">
-    <a href="{% url 'hesabdari:addproduct' %}" type="button" class="btn btn-outline-secondary btn-lg btn-block">
-        add product
-    </a>
-    <a href="{% url 'hesabdari:addcustomer' %}" type="button" class="btn btn-outline-primary btn-lg btn-block">
-        add customer
-    </a>
-    <a href="{% url 'hesabdari:customerlist' %}" type="button" class="btn btn-outline-info btn-lg btn-block">
-        list customer
-    </a>
-    <a href="{% url 'hesabdari:productlist' %}" type="button" class="btn btn-outline-danger btn-lg btn-block">
-        list product
-    </a>
-</div>
+                </tr>
+            {% endfor %}
 
-{% include 'includes/footer_site.html' %}
+            </tbody>
+        </table>
+
+    </div>
+    <div class="d-flex justify-content-center align-item-center gap-2">
+        <a href="{% url 'hesabdari:addproduct' %}" type="button" class="btn btn-outline-secondary btn-lg btn-block">
+            add product
+        </a>
+        <a href="{% url 'hesabdari:addcustomer' %}" type="button" class="btn btn-outline-primary btn-lg btn-block">
+            add customer
+        </a>
+        <a href="{% url 'hesabdari:customerlist' %}" type="button" class="btn btn-outline-info btn-lg btn-block">
+            list customer
+        </a>
+        <a href="{% url 'hesabdari:productlist' %}" type="button" class="btn btn-outline-danger btn-lg btn-block">
+            list product
+        </a>
+    </div>
+{% endblock %}
 
 
-{% include 'includes/foot_script.html' %}
-
-</body>
-</html>

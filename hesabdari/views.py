@@ -1,6 +1,7 @@
 import objects
 from django.shortcuts import render, redirect, get_object_or_404
 
+from .forms import AddCustomer, AddProduct
 from .models import Customer, Product
 
 
@@ -14,20 +15,26 @@ def customer_list_view(request):
 
 
 def add_customer_view(request):
-    products = Product.objects.all()
-    # customerr = Customer.objects.customer_javad() شخصی سازی متد ها
-
     if request.method == "POST":
-        name = request.POST.get('name')
-        phone_number = request.POST.get('number')
-        new_customer = Customer.objects.create(name=name, phone_number=phone_number)
-        return redirect("hesabdari:customerlist")
-    return render(request, "hesabdari/add_customer.html", context={ "prosucts": products})
+        form = AddCustomer(request.POST)
+        if form.is_valid():
+            Customer.objects.create(name=form.cleaned_data["name"], phone_number=form.cleaned_data["phonenumber"])
+            return redirect("hesabdari:customerlist")
+    else:
+        form = AddCustomer()
+
+    return render(request, "hesabdari/add_customer.html", context={"form": form})
 
 
 def customer_taki_view(request, id):
     customerr = get_object_or_404(Customer, id=id)
     product = Product.objects.all()
+    if request.method == "POST":
+        for i in product:
+            choiceproduct = request.POST.get(i.name)
+            if choiceproduct is not None:
+                customerr.product.add(Product.objects.get(id=choiceproduct))
+
     if request.method == "GET":
         name_product = request.GET.get('serch')
         if name_product:
@@ -48,14 +55,15 @@ def delete_customer(request, id):
 
 
 def add_product_view(request):
-
     if request.method == "POST":
-        name_product = request.POST.get('name')
-        price_product = request.POST.get('price')
-        new_product = Product.objects.create(name=name_product,price_product=price_product)
-        return redirect("hesabdari:productlist")
+        form = AddProduct(request.POST)
+        if form.is_valid():
+            Product.objects.create(name=form.cleaned_data["name"], price_product=form.cleaned_data["price_product"])
+            return redirect("hesabdari:productlist")
+    else:
+        form = AddProduct()
 
-    return render(request, 'hesabdari/add_product.html',)
+    return render(request, 'hesabdari/add_product.html', {"form": form})
 
 
 def delete_product_view(request, id):
@@ -66,4 +74,4 @@ def delete_product_view(request, id):
 
 def list_product_view(request):
     products = Product.objects.all()
-    return render(request, 'hesabdari/product_list.html',context={"products" : products})
+    return render(request, 'hesabdari/product_list.html', context={"products": products})

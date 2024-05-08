@@ -1,45 +1,94 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html dir="rtl" lang="en">
-<head>
-    {% include 'includes/head_tags.html' %}
-</head>
-<body data-spy="scroll" data-offset="80">
-{% include 'includes/header_site.html' %}
-<div class="section-title text-center mt-5">
-    <h2>آخرین وبلاگ و اخبار</h2>
-    <p>ما یک رویکرد کاملاً جدید برای اساسی ترین پارادایم های برنامه نویسی ارائه می دهیم. از میان طیف گسترده ای از
-        گزینه های برنامه نویسی انتخاب کنید و مهارت های جدیدی به دست آورید! </p>
-</div>
-<section id="blog" class="blog_area section-padding">
+
+{% block title %}
+    لیست ولاگ های اخیر
+{% endblock %}
+
+
+{% block content %}
     <div class="container">
-        <div class="row">
-            {% for i in veblogs %}
-                <div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s"
-                     data-wow-offset="0">
-                    <div class="single_blog">
-                        {% if i.image %}
-                            <img src="{{ i.image.url }}" class="img-fluid" alt="imageee">
-                        {% else %}
-                            <img src="{% static 'images/icons/user.png' %}" class="img-fluid" alt="image-user">
+        <div class="section-title text-center mt-5">
+            <h2> وبلاگ و اخبار</h2>
+            <h6></h6>
 
-                        {% endif %}
-                        <div class="content_box">
-                            <h2>{{ i.title }}</h2>
-                            <span>{{ i.aouter }},</span><span>{{ i.created }}</span>
-                            {% for i in i.type.all %}
+            <h6 class="mt-4 mb-4">دسته بندی مورد نظر خود را انتخاب کنید</h6>
+            <div  class="dis-flex justify-content-center align-items-center">
 
-                                <span class="text-warning"> {{ i }},</span>
-                                {% endfor %}
-                            <a href="/blog/{{ i.id }}" class=" btn btn-outline-primary px-4 mt-3">ادامه مطلب</a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+                {% for i in all_category %}
+                    <a href="{% url 'veblog:category_veblogs' i.id %}" class="btn mt-2 btn-outline-primary">{{ i.title }}</a>
+                {% endfor %}
+            </div>
         </div>
     </div>
-</section>
-{% include 'includes/footer_site.html' %}
-{% include 'includes/foot_script.html' %}
-</body>
-</html>
+
+
+    <section id="blog" class="blog_area section-padding">
+        <div class="container">
+         <div class="d-flex gap-1 justify-content-center align-items-center">
+                {% if category_name %}
+
+                    <h6 class="single_agent">{{ category_name }}</h6>
+                {% else %}
+                {% endif %}
+
+            </div>
+            <div class="row">
+                {% for i in veblogs %}
+                    <div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s"
+                         data-wow-offset="0">
+                        <div class="single_blog">
+                            {% if i.image %}
+                                <img src="{{ i.image.url }}" class="img-fluid" alt="imageee">
+                            {% else %}
+                                <img src="{% static 'images/icons/user.png' %}" class="img-fluid" alt="image-user">
+
+                            {% endif %}
+                            <div class="content_box">
+                                <h2>{{ i.title }}</h2>
+                                <span>{{ i.aouter }},</span><span>{{ i.created }}</span>
+                                {% for i in i.type.all %}
+
+                                    <span class="text-warning"> {{ i }},</span>
+                                {% endfor %}
+                                <a href="{{ i.get_absolote_url }}" class=" btn btn-outline-primary px-4 mt-3">ادامه مطلب</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if veblogs.has_other_pages %}
+                <div class="d-flex gap-3 justify-content-center align-items-center">
+                    {% if veblogs.has_previous %}
+                        <a href="?page={{ veblogs.previous_page_number }}" class="btn btn-outline-success ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8m-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5"/>
+                            </svg>
+                        </a>
+                    {% endif %}
+
+                    {% for i in veblogs.paginator.page_range %}
+                        <a href="?page={{ i }}" class="btn btn-outline-primary">{{ i }}</a>
+
+                    {% endfor %}
+                    {% if veblogs.has_next %}
+                        <a href="?page={{ veblogs.next_page_number }}" class="btn btn-outline-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5"/>
+                            </svg>
+                        </a>
+                    {% endif %}
+
+
+                </div>
+
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
+
+

@@ -40,32 +40,35 @@
                              style="width: 150px;height: 150px;border-radius: 50%"/>
 					</span>
 
-                <span class="login100-form-title p-b-34 p-t-27">
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        {{ form.errors }}
+                    </div>
+                {% else %}
+                    <span class="login100-form-title p-b-34 p-t-27">
 						sign in
 					</span>
-                {% if erors %}
 
-                    <div class="d-flex justify-content-center align-items-center">
-                        <p class="badge badge-danger text-white p-4 mb-3">{{erors.0 }}</p>
 
-                    </div>
                 {% endif %}
 
+
                 <div class="wrap-input100 validate-input" data-validate="Enter username">
-                    <input class="input100" type="text" name="username" placeholder="Username">
+
+                    {{ form.username }}
                     <span class="focus-input100" data-placeholder="&#xf207;"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter email">
-                    <input class="input100" type="email" name="email" placeholder="email">
+                    {{ form.email }}
                     <span class="focus-input100" data-placeholder="&#xf207;"></span>
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" type="password" name="password1" placeholder="Password">
+                    {{ form.password }}
                     <span class="focus-input100" data-placeholder="&#xf191;"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter password again">
-                    <input class="input100" type="password" name="password2" placeholder="Password">
+                    {{ form.password2 }}
                     <span class="focus-input100" data-placeholder="&#xf191;"></span>
                 </div>
 

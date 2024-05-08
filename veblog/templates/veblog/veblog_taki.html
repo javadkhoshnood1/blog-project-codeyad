@@ -1,148 +1,142 @@
-
-
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html dir="rtl" lang="en">
-<head>
-    {% include 'includes/head_tags.html' %}
-</head>
-<body data-spy="scroll" data-offset="80">
-{% include 'includes/header_site.html' %}
-<section class="blog-page section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 col-sm-12 col-xs-12">
-                <div class="arti_single">
-                    <div class="arti_img_two"><img src="{{ veblog.image.url }}" class="img-fluid" alt="وبلاگ image">
+
+{% block title %}
+    {{ veblog.title }}
+{% endblock %}
+
+
+{% block content %}
+    <section class="blog-page section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-sm-12 col-xs-12">
+                    <div class="arti_single">
+                        <div class="arti_img_two"><img src="{{ veblog.image.url }}" class="img-fluid" alt="وبلاگ image">
+                        </div>
+                        <div class="arti_content "><h2>
+                            {{ veblog.title }}
+                        </h2></div>
+                        <div class="arti_content">
+                            <p>{{ veblog.discription }}</p>
+                        </div>
                     </div>
-                    <div class="arti_content "><h2>
-                        {{ veblog.title }}
-                    </h2></div>
-                    <div class="arti_content">
-                        <p>{{ veblog.discription }}</p>
-                    </div>
-                </div>
-                <div class="comments_part">
-                    <h3 class="blog_head_title">نظرات</h3>
-                    <div class="single_comment">
-                        <img src="assets/img/blog/c1.jpg" alt=""><h4>ایوب فنونی</h4>
-                        <p>لورم ایوم متن ساختگی با تولید آسان نامفهوم از صنعت چاپ با استفاده از طراحان گرافیک است.
-                            چاپگرها و متون بلکه روزنامه و در ستون و سطرآنان که لازم است و برای شرایط فعلی مجله ت</p>
-                    </div>
-                    <div class="single_comment sc_left">
-                        <img src="assets/img/blog/c3.jpg" alt=""><h4>کادر بای</h4>
-                        <p>لورم ایوم متن ساختگی با تولید آسان نامفهوم از صنعت چاپ با استفاده از طراحان گرافیک است.
-                            چاپگرها و متون بلکه روزنامه و در ستون و سطرآنان که لازم است و برای شرایط فعلی مجله ت</p>
-                    </div>
-                    <div class="single_comment single_comment_mbnone">
-                        <img src="assets/img/blog/c2.jpg" alt=""><h4>مارک لینومی</h4>
-                        <p>لورم ایوم متن ساختگی با تولید آسان نامفهوم از صنعت چاپ با استفاده از طراحان گرافیک است.
-                            چاپگرها و متون بلکه روزنامه و در ستون و سطرآنان که لازم است و برای شرایط فعلی مجله ت</p>
-                    </div>
-                </div>
-                <div class="comment_form">
-                    <h3 class="blog_head_title">یک نظر اضافه کنید</h3>
-                    <div class="contact comment-box">
-                        <form id="contact-form" method="post" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="form-group col-md-6"><input type="text" name="name" class="form-control"
-                                                                        id="first-name" placeholder="نام"
-                                                                        required="required"></div>
-                                <div class="form-group col-md-6"><input type="email" name="email" class="form-control"
-                                                                        id="first-email" placeholder="پست الکترونیک"
-                                                                        required="required"></div>
-                                <div class="form-group col-md-12"><input type="text" name="subject" class="form-control"
-                                                                         id="subject" placeholder="موضوع"
-                                                                         required="required"></div>
-                                <div class="form-group col-md-12"><textarea rows="6" name="message" class="form-control"
-                                                                            id="description" placeholder="پیغام تو"
-                                                                            required="required"></textarea></div>
-                                <div class="col-md-12">
-                                    <div class="actions">
-                                        <button type="submit" value="Send message" name="submit" id="submitButton"
-                                                class="btn btn_one" title="Submit Your Message!">ثبت کردن نظر
-                                        </button>
+                    <div class="comments_part">
+                        <h3 class="blog_head_title">نظرات</h3>
+                        {% for  i in veblog.comments.all %}
+                            {% if i.reply_comment == None %}
+                                <div class="single_comment">
+                                    <img src="{% static 'img/blog/c3.jpg' %}" alt=""><h4
+                                        class="d-inline">{{ i.user }}</h4>
+                                    <span style="font-size: 10px">{{ i.get_created_comment }}</span>
+                                    <p>{{ i.body }}</p>
+                                    <div class="d-flex justify-content-end align-items-end">
+                                        <a href="#reply" onclick="set_value({{ i.id }})" id="set_value"
+                                           class="set_value btn btn-outline-primary">reply
+                                        </a>
+
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+
+                                {% for reply in i.reply.all %}
+                                    <div style="width: 300px;height: 100px;margin-right: 30px" class="single_comment">
+                                        <img src="{% static "img/blog/c1.jpg" %}" alt=""><h4
+                                            class="d-inline">{{ reply.user }}</h4>
+                                        <span style="font-size: 10px">{{ reply.get_created_comment }}</span>
+                                        <p>{{ reply.body }}</p>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-5 col-sm-12 col-xs-12">
-                                <div class="sidebar-post">
+                <div class="col-lg-5 col-sm-12 col-xs-12">
+                    <div class="sidebar-post">
 
-                    <div class="sidebar_title"><h4>ما را دنبال کنید</h4></div>
-                    <div class="single_social">
-                        <ul>
-                            <li>
-                                <div class="social_item b_facebook"><a href="#" title="facebook"><i
-                                        class="fa fa-facebook"></i><span class="item-list">150 هزار لایک</span></a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="social_item b_twitter"><a href="#" title="twitter"><i
-                                        class="fa fa-twitter"></i><span
-                                        class="item-list">138 هزار دنبال کننده</span></a></div>
-                            </li>
-                            <li>
-                                <div class="social_item b_youtube"><a href="#" title="youtube"><i
-                                        class="fa fa-youtube"></i><span class="item-list">90 هزار مشترک</span></a></div>
-                            </li>
-                            <li>
-                                <div class="social_item b_pinterest"><a href="#" title="pinterest"><i
-                                        class="fa fa-pinterest"></i><span class="item-list">350 هزار دنبال کننده</span></a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="social_item b_tumblr"><a href="#" title="rss"><i
-                                        class="fa fa-tumblr"></i><span class="item-list">901 فالوور</span></a></div>
-                            </li>
-                            <li>
-                                <div class="social_item b_rss"><a href="#" title="rss"><i class="fa fa-rss"></i><span
-                                        class="item-list">411 فالوور</span></a></div>
-                            </li>
-                        </ul>
+                        <div class="sidebar_title"><h4>ما را دنبال کنید</h4></div>
+                        <div class="single_social">
+                            <ul>
+                                <li>
+                                    <div class="social_item b_facebook"><a href="#" title="facebook"><i
+                                            class="fa fa-facebook"></i><span class="item-list">150 هزار لایک</span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="social_item b_twitter"><a href="#" title="twitter"><i
+                                            class="fa fa-twitter"></i><span
+                                            class="item-list">138 هزار دنبال کننده</span></a></div>
+                                </li>
+                                <li>
+                                    <div id="reply" class="social_item b_youtube"><a href="#" title="youtube"><i
+                                            class="fa fa-youtube"></i><span class="item-list">90 هزار مشترک</span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="social_item b_pinterest"><a href="#" title="pinterest"><i
+                                            class="fa fa-pinterest"></i><span
+                                            class="item-list">350 هزار دنبال کننده</span></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="social_item b_tumblr"><a href="#" title="rss"><i
+                                            class="fa fa-tumblr"></i><span class="item-list">901 فالوور</span></a></div>
+                                </li>
+                                <li>
+                                    <div class="social_item b_rss"><a href="#" title="rss"><i
+                                            class="fa fa-rss"></i><span
+                                            class="item-list">411 فالوور</span></a></div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                                    <div class="comment_form">
-                    <h3 class="blog_head_title">یک نظر اضافه کنید</h3>
-                    <div class="contact comment-box">
-                        <form id="contact-form" method="post" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="form-group col-md-6"><input type="text" name="name" class="form-control"
-                                                                        id="first-name" placeholder="نام"
-                                                                        required="required"></div>
-                                <div class="form-group col-md-6"><input type="email" name="email" class="form-control"
-                                                                        id="first-email" placeholder="پست الکترونیک"
-                                                                        required="required"></div>
-                                <div class="form-group col-md-12"><input type="text" name="subject" class="form-control"
-                                                                         id="subject" placeholder="موضوع"
-                                                                         required="required"></div>
-                                <div class="form-group col-md-12"><textarea rows="6" name="message" class="form-control"
-                                                                            id="description" placeholder="پیغام تو"
-                                                                            required="required"></textarea></div>
-                                <div class="col-md-12">
-                                    <div class="actions">
-                                        <button type="submit" value="Send message" name="submit" id="submitButton"
-                                                class="btn btn_one" title="Submit Your Message!">ثبت کردن نظر
-                                        </button>
+                    <div class="comment_form">
+                        <h3 class="blog_head_title">یک نظر اضافه کنید</h3>
+                        <div class="contact comment-box">
+                            <form id="contact-form" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <input value="" type="hidden" class="parent_id" id="parent_id" name="parent_id">
+                                        <textarea rows="6" name="message"
+                                                  class="form-control"
+                                                  id="description" placeholder="پیغام تو"
+                                                  required="required"></textarea></div>
+                                    <div class="col-md-12">
+                                        {% if  request.user.is_authenticated %}
+                                            <div class="actions">
+                                                <button type="submit" value="Send message" name="submit"
+                                                        id="submitButton"
+                                                        class="btn btn_one" title="Submit Your Message!">ثبت کردن نظر
+                                                </button>
+                                            </div>
+                                        {% else %}
+                                            <div class="actions">
+                                                <p>برای ثبت نظر وارد حساب خود شوید</p>
+                                                <a href="{% url 'acount:login' %}" class="btn btn_one"
+                                                   id="submitButton">ورود به حساب</a>
+                                            </div>
+
+                                        {% endif %}
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-    </div>
-</section>
-{% include 'includes/footer_site.html' %}
-<div class="foot_copy">
-    <div class="footer_copyright"><p>© 2024. All Rights Reserved.</p></div>
-</div>
-{% include 'includes/foot_script.html' %}
-</body>
-</html>
+    </section>
+
+    <script>
+        function set_value(id) {
+            document.querySelector(".parent_id").value = id
+            console.log(document.querySelector(".parent_id").value)
+            console.log(id)
+
+        }
+    </script>
+
+{% endblock %}

@@ -1,73 +1,63 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block title %}
+    لیست محصولات فروشگاه
 
-{% load static %}
+{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% include 'includes/head_tags.html' %}
-
-</head>
-
-<body dir="rtl">
-{% include 'includes/header_site.html' %}
+{% block content %}
 
 
-<div class="container mt-5">
-    <h1 class="massagejavadlist text text-center">list customer</h1>
+    <div class="container mt-5">
+        <h1 class="massagejavadlist text text-center">list product</h1>
 
-</div>
+    </div>
 
-<div class="container mt-5">
+    <div class="container mt-5">
 
-    <table class="table table-dark  table-striped table-hover">
-        <thead>
-        <tr>
-            <th scope="col">id</th>
-            <th scope="col">name</th>
-            <th scope="col">price</th>
-
-
-            <th scope="col">delete</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        {% for i in products %}
+        <table class="table table-dark  table-striped table-hover">
+            <thead>
             <tr>
-                <th scope="row">{{ i.id }}</th>
-                <td>{{ i.name }}</td>
-                <td>{{ i.price_product }}</td>
+                <th scope="col">id</th>
+                <th scope="col">name</th>
+                <th scope="col">price</th>
 
-                <td><a class="btn btn-outline-danger" href="/hesabdari/deleteproduct/{{ i.id }}"> delete product</a>
-                </td>
+
+                <th scope="col">delete</th>
 
             </tr>
-        {% endfor %}
+            </thead>
+            <tbody>
+            {% for i in products %}
+                <tr>
+                    <th scope="row">{{ i.id }}</th>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.price_product }}</td>
 
-        </tbody>
-    </table>
+                    <td><a class="btn btn-outline-danger" href="/hesabdari/deleteproduct/{{ i.id }}"> delete product</a>
+                    </td>
 
-</div>
-<div class="d-flex justify-content-center align-item-center gap-2">
-    <a href="{% url 'hesabdari:addproduct' %}" type="button" class="btn btn-outline-secondary btn-lg btn-block">
-        add product
-    </a>
-     <a href="{% url 'hesabdari:addcustomer' %}" type="button" class="btn btn-outline-primary btn-lg btn-block">
-        add customer
-    </a>
-     <a href="{% url 'hesabdari:customerlist' %}" type="button" class="btn btn-outline-info btn-lg btn-block">
-        list customer
-    </a>
-     <a href="{% url 'hesabdari:productlist' %}" type="button" class="btn btn-outline-danger btn-lg btn-block">
-        list product
-    </a>
-</div>
+                </tr>
+            {% endfor %}
 
-{% include 'includes/footer_site.html' %}
+            </tbody>
+        </table>
+
+    </div>
+    <div class="d-flex justify-content-center align-item-center gap-2">
+        <a href="{% url 'hesabdari:addproduct' %}" type="button" class="btn btn-outline-secondary btn-lg btn-block">
+            add product
+        </a>
+        <a href="{% url 'hesabdari:addcustomer' %}" type="button" class="btn btn-outline-primary btn-lg btn-block">
+            add customer
+        </a>
+        <a href="{% url 'hesabdari:customerlist' %}" type="button" class="btn btn-outline-info btn-lg btn-block">
+            list customer
+        </a>
+        <a href="{% url 'hesabdari:productlist' %}" type="button" class="btn btn-outline-danger btn-lg btn-block">
+            list product
+        </a>
+    </div>
+{% endblock %}
 
 
-{% include 'includes/foot_script.html' %}
-
-</body>
-</html>
