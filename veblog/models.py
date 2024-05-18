@@ -22,6 +22,10 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "دسته بندی"
+        verbose_name_plural = "دسته بندی ها "
+
 
 class Veblog(models.Model):
     title = models.CharField(max_length=50, verbose_name="عنوان وبلاگ")
@@ -43,6 +47,10 @@ class Veblog(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "وبلاگ"
+        verbose_name_plural = "وبلاگ ها "
+
 
 class Comment(models.Model):
     body = models.TextField(max_length=300, null=True, verbose_name="متن کامنت")
@@ -58,3 +66,7 @@ class Comment(models.Model):
 
     def get_created_comment(self):
         return datetime2jalali(self.created_comment)
+
+    class Meta:
+        verbose_name = "نظر"
+        verbose_name_plural = "نظرات"

@@ -13,10 +13,11 @@
             <h6></h6>
 
             <h6 class="mt-4 mb-4">دسته بندی مورد نظر خود را انتخاب کنید</h6>
-            <div  class="dis-flex justify-content-center align-items-center">
+            <div class="dis-flex justify-content-center align-items-center">
 
                 {% for i in all_category %}
-                    <a href="{% url 'veblog:category_veblogs' i.id %}" class="btn mt-2 btn-outline-primary">{{ i.title }}</a>
+                    <a href="{% url 'veblog:category_veblogs' i.id %}"
+                       class="btn mt-2 btn-outline-primary">{{ i.title }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -25,7 +26,7 @@
 
     <section id="blog" class="blog_area section-padding">
         <div class="container">
-         <div class="d-flex gap-1 justify-content-center align-items-center">
+            <div class="d-flex gap-1 justify-content-center align-items-center">
                 {% if category_name %}
 
                     <h6 class="single_agent">{{ category_name }}</h6>
@@ -51,16 +52,17 @@
 
                                     <span class="text-warning"> {{ i }},</span>
                                 {% endfor %}
-                                <a href="{{ i.get_absolote_url }}" class=" btn btn-outline-primary px-4 mt-3">ادامه مطلب</a>
+                                <a href="{{ i.get_absolote_url }}" class=" btn btn-outline-primary px-4 mt-3">ادامه
+                                    مطلب</a>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             </div>
-            {% if veblogs.has_other_pages %}
+            {% if page_obj.has_other_pages %}
                 <div class="d-flex gap-3 justify-content-center align-items-center">
-                    {% if veblogs.has_previous %}
-                        <a href="?page={{ veblogs.previous_page_number }}" class="btn btn-outline-success ">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-success ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"
@@ -69,12 +71,12 @@
                         </a>
                     {% endif %}
 
-                    {% for i in veblogs.paginator.page_range %}
+                    {% for i in page_obj.paginator.page_range %}
                         <a href="?page={{ i }}" class="btn btn-outline-primary">{{ i }}</a>
 
                     {% endfor %}
-                    {% if veblogs.has_next %}
-                        <a href="?page={{ veblogs.next_page_number }}" class="btn btn-outline-success">
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-success">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"

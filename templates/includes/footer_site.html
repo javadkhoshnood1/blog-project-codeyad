@@ -29,7 +29,7 @@
                     </div>
                     <div class="sf_contact">
                         <span class="ti-mobile"></span>
-                        <p>09021632566    </p>
+                        <p>09021632566 </p>
                     </div>
                     <div class="sf_contact">
                         <span class="ti-mobile"></span>
@@ -45,8 +45,10 @@
                 <div class="single_footer">
                     <h4>دانلود برنامه</h4>
                     <p>برنامه ما را از فروشگاه برنامه و فروشگاه goole play دانلود کنید.</p>
-                    <a href="index.html"><img src="{% static 'img/google-play.jpg' %}" class="foot_img" alt=""></a><a
-                        href="index.html"><img src="{% static 'img/app-store.jpg' %}" class="foot_img" alt=""></a>
+                    <a href="{% url 'home:main' %}"><img src="{% static 'img/google-play.jpg' %}" class="foot_img"
+                                                         alt=""></a><a
+                        href="{% url 'home:main' %}"><img src="{% static 'img/app-store.jpg' %}" class="foot_img"
+                                                          alt=""></a>
                 </div>
             </div>
         </div>

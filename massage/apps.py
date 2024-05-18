@@ -4,3 +4,4 @@ from django.apps import AppConfig
 class MassageConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'massage'
+    verbose_name = "لیست پیام ها"

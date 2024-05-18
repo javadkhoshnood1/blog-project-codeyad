@@ -40,10 +40,10 @@
                 {% endfor %}
             </div>
         </div>
-        {% if coachs.has_other_pages %}
+        {% if page_obj.has_other_pages %}
             <div class="d-flex mt-4 gap-3 justify-content-center align-items-center">
-                {% if coachs.has_previous %}
-                    <a href="?page={{ coachs.previous_page_number }}" class="btn btn-outline-success ">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-success ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
@@ -51,12 +51,12 @@
                         </svg>
                     </a>
                 {% endif %}
-                {% for i in coachs.paginator.page_range %}
+                {% for i in page_obj.paginator.page_range %}
                     <a href="?page={{ i }}" class="btn btn-outline-primary">{{ i }}</a>
 
                 {% endfor %}
-                {% if coachs.has_next %}
-                    <a href="?page={{ coachs.next_page_number }}" class="btn btn-outline-success">
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-success">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"

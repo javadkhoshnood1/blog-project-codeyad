@@ -26,9 +26,21 @@ class AddProduct(forms.ModelForm):
                 "class": "form-control",
                 "placeholder": "enter your name"
             }),
+            "image": forms.FileInput(attrs={
+                "class": "form-control",
+                "placeholder": "enter your image"
+            }),
             "price_product": forms.TextInput(attrs={
                 "class": "form-control",
                 "placeholder": "enter your price"
+            }),
+            "percent_price": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "enter your percent",
+                "disabled": "True",
+                "required": "False",
+                "value": "0"
+
             })
         }
 

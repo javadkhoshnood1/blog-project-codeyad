@@ -4,12 +4,14 @@ from . import views
 app_name = 'hesabdari'
 
 urlpatterns = [
-    path('customerlist/', views.customer_list_view,name= "customerlist"),
-    path('productlist/', views.list_product_view, name="productlist"),
-    path('addcustomer/', views.add_customer_view ,name="addcustomer"),
-    path('deltecustomer/<int:id>', views.delete_customer ,name="dalatecustomer"),
-    path('addproduct/', views.add_product_view,name="addproduct"),
-    path('deleteproduct/<int:id>', views.delete_product_view,name="deletproduct"),
-    path('customer/<int:id>/', views.customer_taki_view ,name="coustomer_taki"),
+    path('customerlist/', views.CustomerListView.as_view(), name="customerlist"),
+    path('productlist/', views.ProductListView.as_view(), name="productlist"),
+    path('addcustomer/', views.AddCustomerView.as_view(), name="addcustomer"),
+    path('deltecustomer/<int:id>', views.delete_customer, name="dalatecustomer"),
+    path('deleteproductcustomer/<int:idproduct>/<int:idcustomer>', views.deleteproductcustomer,
+         name="dalateproductcustomer"),
+    path('addproduct/', views.AddProductView.as_view(), name="addproduct"),
+    path('deleteproduct/<int:id>', views.delete_product_view, name="deletproduct"),
+    path('customer/<int:id>/', views.CustomerDetailView.as_view(), name="coustomer_taki"),
 
 ]

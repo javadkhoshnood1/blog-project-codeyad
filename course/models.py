@@ -14,6 +14,10 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "دسته بندی "
+        verbose_name_plural = "دسته بندی ها "
+
 
 class Course(models.Model):
     date = models.DateField(auto_now=True, )
@@ -33,6 +37,10 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "دروه"
+        verbose_name_plural = "دوره ها"
+
 
 class Comment(models.Model):
     body = models.TextField(max_length=200, null=True, blank=True, verbose_name="متن کامنت دوره")
@@ -40,5 +48,12 @@ class Comment(models.Model):
     date = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ارسال نظر")
     course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True, verbose_name="برای دوره ")
 
+    def __str__(self):
+        return self.body
+
     def get_date(self):
         return datetime2jalali(self.date)
+
+    class Meta:
+        verbose_name = "نظر"
+        verbose_name_plural = "نظرات"

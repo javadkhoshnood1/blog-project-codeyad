@@ -124,7 +124,8 @@
                     <div class="cat_list">
                         <ul>
                             {% for  i in category_courses %}
-                                <li><a href="#"><img src="{% static 'img/e4.png' %}" alt="category-image">{{ i.title }}
+                                <li><a href="{% url 'course:courselist' %}"><img src="{% static 'img/e4.png' %}"
+                                                                                 alt="category-image">{{ i.title }}
                                 </a>
                                 </li>
                             {% endfor %}

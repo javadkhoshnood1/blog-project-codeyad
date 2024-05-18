@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load tags %}
+{#{% load tags %}#}
 {% block title %}
     {{ course.title }}
 
@@ -17,7 +17,7 @@
                             <span><i class="fa fa-calendar"></i>10 اکتبر 2024</span><span><i
                                 class="fa fa-clock-o"></i>{{ course.time_course }} روز</span><span><i
                                 class="fa fa-table"></i><strong>30 صندلی موجود</strong></span>
-                            <p>{{ course.discription|cutter:100 }}</p>
+                            <p>{{ course.discription|truncatewords:100 }}</p>
                         </div>
                     </div>
                     <div class="course-details-content section-bg">

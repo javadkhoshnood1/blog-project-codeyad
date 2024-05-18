@@ -1,15 +1,56 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block title %}
     لیست مشتریان
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-5">
-        <h1 class="massagejavadlist text text-center">list customer</h1>
+    <div class="row mt-5">
+        <div class="col-lg-6">
+            <div class="d-flex justify-content-center gap-2 align-items-center">
+                {% if name %}
+                    <a
+                            class="p-2 rounded rounded-5 mb-4 bg-primary shadow shadow-lg text-white d-inline-block">تمامی
+                        مشتریان با نام {{ name }}</a>
+                    <a href="{% url 'hesabdari:customerlist' %}"
+                       class="p-2 rounded rounded-5 mb-4 btn btn-outline-primary d-inline-block"> نمایش همه
+                        مشتریان</a>
 
+
+                {% else %}
+                    <a href="{% url 'hesabdari:customerlist' %}"
+                       class="p-2 rounded rounded-5 mb-4 bg-primary shadow shadow-lg text-white d-inline-block">همه
+                        مشتریان
+                        فروشگاه</a>
+
+                {% endif %}
+
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <form method="get">
+                <div class="d-flex mb-5 justify-content-center align-items-center">
+
+                    <div class="input-group w-50">
+                        <div class="input-group-prepend">
+                            <button type="submit"
+                                    class="input-group-text btn btn-outline-secondary"> search
+                            </button>
+                        </div>
+                        <input type="text" class="form-control" placeholder="search" aria-label="Username"
+                               name="searchname"
+                               aria-describedby="basic-addon1">
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
     </div>
+
 
     <div class="container mt-5">
 
@@ -20,6 +61,7 @@
                 <th scope="col">name</th>
                 <th scope="col">number</th>
                 <th scope="col">date</th>
+
                 <th scope="col">product number</th>
                 <th scope="col">edit</th>
 
@@ -34,6 +76,7 @@
                     <td>{{ i.name }}</td>
                     <td>{{ i.phone_number }}</td>
                     <td>{{ i.get_created_costomer }}</td>
+
                     <td>{{ i.product.count }}</td>
                     <td><a class="btn btn-outline-success" href="{{ i.get_absolote_url }}"> edit customer</a>
 
