@@ -132,3 +132,11 @@ class CourseDetailView(LoginRequierdUser, DetailView):
         context = super().get_context_data(**kwargs)
         context["comment"] = Comment.objects.all()
         return context
+
+    def post(self, request, *args, **kwargs):
+        course = Course.objects.get(id=kwargs["id"])
+        body = request.POST.get("body")
+        if body:
+            Comment.objects.create(body=body, course=course, user=request.user, )
+
+        return render(request, self.template_name, {self.context_object_name: course})
