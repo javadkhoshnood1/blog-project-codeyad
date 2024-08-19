@@ -41,7 +41,7 @@ class CategoryCourseView(DetailView):
         context["list_courses"] = category_id.course_set.all()
         return context
 
-
+    
 #
 # def category_course_view(request, id=None):
 #     category_list = Category.objects.all()
